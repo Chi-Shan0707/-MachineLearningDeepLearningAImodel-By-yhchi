@@ -1,5 +1,3 @@
-
-
 import numpy
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
@@ -27,7 +25,7 @@ i_t=iris.target
 #print(i_v)
 #print(i_t)
 
-v_train,v_test,t_train,t_test=train_test_split(i_v,i_t,test_size=0.3)
+v_train,v_test,t_train,t_test=train_test_split(i_v,i_t,test_size=0.2,random_state=4)
 #把整个集合分成学习的data和测试的两部分
 #train:test=8:2
 #这步split操作顺带将数据打乱打乱
@@ -39,7 +37,7 @@ v_train,v_test,t_train,t_test=train_test_split(i_v,i_t,test_size=0.3)
 
 
 
-knn=KNeighborsClassifier()
+knn=KNeighborsClassifier(n_neighbors=5)
 knn.fit(v_train,t_train)
 # knn 是一个 KNeighborsClassifier 类的实例对象
 # 它属于机器学习模型对象类型，具体来说是一个分类器（Classifier）对象
@@ -47,12 +45,18 @@ knn.fit(v_train,t_train)
 
 
 
-
+Prediction=knn.predict(v_test)
 #比对
-print(knn.predict(v_test))
+print(Prediction)
 print(t_test)
 print("其中")
 for i in range(len(t_test)):
     if knn.predict(v_test)[i]!=t_test[i]:
         print(f"第{i}朵花预测错误,该花特征值为:{v_test[i]},预测结果为:{knn.predict(v_test)[i]},正确结果为:{t_test[i]}")
+
+
+
+
+
+print(knn.score(v_test,t_test))
 
