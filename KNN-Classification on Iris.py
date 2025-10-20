@@ -57,6 +57,5 @@ for i in range(len(t_test)):
 
 
 
-
 print(knn.score(v_test,t_test))
 
